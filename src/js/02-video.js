@@ -10,10 +10,11 @@ function onPlay({ seconds }) {
   localStorage.setItem('videoplayer-current-time', seconds);
 }
 
-const savedTim = localStorage.getItem('videoplayer-current-time');
-if (savedTim) {
-  console.log(savedTim);
+const savedTime = localStorage.getItem('videoplayer-current-time');
+if (savedTime) {
+  console.log(savedTime);
+  player.setCurrentTime(savedTime);
 }
 
-player
-  .setCurrentTime(savedTim);
+
+

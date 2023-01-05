@@ -13,32 +13,32 @@ const refs = {
 };
 
 refs.form.addEventListener('submit', onFormSummit);
-refs.form.addEventListener('input', throttle(onFormInput, 500));
+refs.form.addEventListener('input', throttle(onFormInput,500));
 
 populateTextarea();
 
 function onFormInput(e) {
   formData[e.target.name] = e.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  console.log(formData);
 }
 
 function onFormSummit(e) {
   e.preventDefault();
-  console.log('Отправка');
+  // console.log('Отправка');
   e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
-  formData = {};
-}
+  // formData = {};
+};
 
 function populateTextarea() {
-  const getData = localStorage.getItem(STORAGE_KEY);
-  const savedMassage = JSON.parse(getData);
-  if (savedMassage) {
-    formData = savedMassage;
-    refs.input.value = formData.email || '';
-    refs.textarea.value = formData.message || '';
-    
+  const savedMessage = localStorage.getItem(STORAGE_KEY);
+  const parsedSavedMessage = JSON.parse(savedMessage);
+  if (parsedSavedMessage) {
+      formData = parsedSavedMessage;
+      refs.input.value = parsedSavedMessage.email || '';
+      refs.textarea.value = parsedSavedMessage.message || '';
   }
-  console.log(formData);
+};
 
-}
+
